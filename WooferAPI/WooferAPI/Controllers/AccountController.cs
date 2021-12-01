@@ -32,7 +32,6 @@ namespace WooferAPI.Controllers
             this.signInManager = signInManager;
         }
 
-        //[Route("Create")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserInfo model)
         {
@@ -57,7 +56,6 @@ namespace WooferAPI.Controllers
         }
 
         [HttpPost]
-        //[Route("Login")]
         public async Task<IActionResult> Login([FromBody] UserInfo userInfo)
         {
             if (ModelState.IsValid)
@@ -92,7 +90,7 @@ namespace WooferAPI.Controllers
             var key = AuthOptions.GetSymmetricSecurityKey();
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var expiration = DateTime.Now.AddMinutes(AuthOptions.LIFETIME);
+            var expiration = DateTime.Now.AddMinutes(AuthOptions.LIFETIME).ToUniversalTime();
 
             JwtSecurityToken token = new JwtSecurityToken(
                issuer: AuthOptions.ISSUER,

@@ -57,6 +57,7 @@ namespace WooferAPI
                     };
                 });
 
+            services.AddCors();
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
             services.AddSession();
@@ -69,6 +70,7 @@ namespace WooferAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseSession();
